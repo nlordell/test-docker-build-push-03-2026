@@ -3,6 +3,8 @@ name: docker
 on:
   pull_request:
   push:
+    tags:
+      - v*
     branches:
       - main
 
@@ -26,6 +28,13 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ghcr.io/nlordell/test-docker-build-push-03-2026
+          tags: |
+            type=ref,event=branch
+            type=ref,event=tag
+            type=match,pattern=v\d.\d.\d-(.*).\d$,group=1
+            type=match,pattern=v\d.\d.\d$,value=latest
+          flavor: |
+            latest=false
 
       - uses: docker/setup-buildx-action@v3
 
