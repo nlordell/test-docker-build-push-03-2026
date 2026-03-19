@@ -31,8 +31,12 @@ jobs:
           tags: |
             type=ref,event=branch
             type=ref,event=tag
-            # create pre-release tags
-            type=match,pattern=v\d.\d.\d-([a-z]*)(.\d)?$,group=1
+            # create latest tags
+            type=semver,pattern=latest,match=v\d*.\d*.\d*$
+            # create beta tags
+            type=semver,pattern=beta,match=v\d*.\d*.\d*-beta.\d*$
+          flavor: |
+            latest=false
 
       - uses: docker/setup-buildx-action@v3
 
