@@ -32,7 +32,7 @@ jobs:
             type=ref,event=branch
             type=ref,event=tag
             # create beta tags on new releases
-            type=raw,value=beta,enable=${{ startsWith(github.ref, "refs/tags/v") }}
+            type=raw,value=beta,enable=${{ startsWith(github.ref, 'refs/tags/v') }}
           flavor: |
             latest=false
 
